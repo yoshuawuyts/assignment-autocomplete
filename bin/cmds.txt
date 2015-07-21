@@ -1,0 +1,3 @@
+  commands:
+    start  start a live development server
+    build  compile assets
