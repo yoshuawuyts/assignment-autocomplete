@@ -45,7 +45,7 @@ function readDir (cb) {
   function walkFn (basedir, filename, stat, next) {
     const pth = path.join(basedir, filename)
     if (!/node_modules/.test(pth) && !/git/.test(pth)) {
-      arr.push(pth)
+      arr.push(filename)
     }
     next()
   }

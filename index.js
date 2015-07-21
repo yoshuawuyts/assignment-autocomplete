@@ -11,6 +11,9 @@ const url = 'http://localhost:1337/blob'
 horsey(el, {
   suggestions: function (done) {
     fetchBlob(done)
+  },
+  render: function (li, suggestion) {
+    li.innerHTML = suggestion
   }
 })
 
