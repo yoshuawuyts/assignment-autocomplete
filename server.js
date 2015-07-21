@@ -1,3 +1,4 @@
+const sendJson = require('send-data/json')
 const brick = require('brick-server')
 const walk = require('fs-walk')
 const path = require('path')
@@ -15,7 +16,7 @@ function serve (args) {
     // return dir structure
     if (req.url === '/blob') {
       return readDir(function (blob) {
-        res.end(blob.toString())
+        sendJson(req, res, blob)
       })
     }
 
@@ -42,7 +43,10 @@ function readDir (cb) {
   // and push to arr
   // (str, str, obj, fn) -> null
   function walkFn (basedir, filename, stat, next) {
-    arr.push(path.join(basedir, filename))
+    const pth = path.join(basedir, filename)
+    if (!/node_modules/.test(pth) && !/git/.test(pth)) {
+      arr.push(pth)
+    }
     next()
   }
 
